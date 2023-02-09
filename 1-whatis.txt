@@ -1,0 +1,17 @@
+** O QUE É POO? **
+
+    Programação orientada a objeto é um paradigma (exemplo que serve como modelo, padrão) centrado em objetos ao invés de funções
+    Ao invés de fazer um programa funcional, você pode fazer um orientado a objetos
+    Não é uma linguagem ou ferramenta de programação, é apenas um estilo de programar ou paradigma de programação
+
+    Há várias linguagens de programação que oferecem suporte para orientação a objetos
+
+** POR QUE USAR POO? **
+
+    Em projetos da faculdade geralmente os programas são feitos da seguinte maneira: Você possui dados armazenados em um conglomerado de variáveis e funções. No entanto, conforme seu programa cresce, você vai ter um monte de funções por toda parte do código e a interdependência entre elas vai tornar a manutenção difícil. 
+    Já na orientação a objetos, combinamos um grupo de variáveis e funções que são relacionáveis em uma unidade, que chamamos de OBJETO. As variáveis são as PROPRIEDADES e as funções são os MÉTODOS.
+
+    Exemplo: Um carro
+    Um carro é um objeto com propriedades como fabricante, modelo, cor e ano. E métodos como acelerar(), frear() e trocarMarcha().
+
+

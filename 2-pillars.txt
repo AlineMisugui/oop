@@ -1,0 +1,65 @@
+** 4 PILARES DA POO **
+
+    1- Encapsulamento;
+    2- Abstração;
+    3- Herança;
+    4- Polimorfismo.
+
+1- ENCAPSULAMENTO
+    
+    Em POO, nós agrupamos variáveis e funções relacionadas que operam dentro de um objeto, isso é o que chamamos de encapsulamento.
+    Observe o código abaixo:
+
+    <code> 
+
+        let baseSalary = 30.000;
+        let overtime = 10;
+        let rate = 20;
+
+        function getWage(baseSalary, overtime, rate) {
+            return baseSalary + (overtime *rate);
+        }
+
+    </code>
+
+    Agora compare o código anterior ao código seguinte:
+
+    <code>
+
+        let employee = {
+            baseSalary: 30.000,
+            overtime: 10,
+            rate: 20,
+            getWage: function() {
+                return this.baseSalary + (this.overtime * this.rate);
+            }
+        };
+        
+        employee.getWage();
+
+    </code>
+
+    Por que o segundo exemplo é melhor?
+
+    Porque a função 'getWage()' do segundo exemplo não possui nenhum parâmetro, o que consequentemente diminui as dependências e facilita a manutenção. Além disso, você evita erros ao encapsular tudo em uma única unidade.
+
+    Reduz complexidade e aumenta reusabilidade
+
+2- ABSTRAÇÃO
+
+    the process of hiding the internal details of an application from the outer world.
+    Esconde detalhes e complexidade e mostra apenas o essencial
+    Torna a interface mais simples, reduz impacto de mudanças
+
+    Reduz complexidade e isola impactos de mudanças
+
+3- HERANÇA
+
+    Quando uma classe mais específica reaproveita características de uma classe mais genérica
+
+    Elimina código redundante
+
+4- POLIMORFISMO 
+
+    Permite que um mesmo método apresente vários comportamentos diferentes, dependendo do objeto
+    Ajuda refatorar casos feios de switch/case
