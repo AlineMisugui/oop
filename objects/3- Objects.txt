@@ -1,0 +1,223 @@
+
+var: problemas de escopo, não tem block scope
+
+let: substituiu var no ES6
+
+const: constante, não dá para retribuir um valor
+
+Formas de criar objetos: object literal, factory e constructor
+
+
+** OBJECT LITERALS **
+
+    É uma maneira rápida e literal de criar um objeto, passando entre o par de chaves { } a propriedade e o seu respectivo valor: let obj = { name: "Rocketseat",  bootcamp: "Go Stack", propriedade: "valor"}
+    Podemos usar objects literals para substituir a estrutura switch case e if else
+
+    Veja um exemplo de código com switch:
+
+    <code>
+        let day;
+
+        switch (new.Date().getDay()); {
+            case 0: 
+                day = 'Sunday';
+                break;
+            case 1: 
+                day = 'Monday';
+                break;
+            case 2: 
+                day = 'Tuesday';
+                break;
+            case 3:
+                day = 'Wednesday';
+                break;
+            case 4:
+                day = 'Thursday';
+                break;
+            case 5:
+                day = 'Friday';
+                break;
+            case 6: 
+                day = 'Sturday';
+                break;
+            default:
+                throw new Error('Hey! We have only 7 days in the week!');
+        }
+
+        console.log(`What day of the week is today? ${day}`);
+    </code>
+
+    Agora veja o mesmo exemplo com o uso de object literal
+
+    <code>
+        const daysOfTheWeek = {
+            0: "Sunday";
+            1: "Monday";
+            2: "Tuesday";
+            3: "Wednesday";
+            4: "Thursday";
+            5: "Friday";
+            6: "Saturday";
+        };
+
+        console.log(`What day of the week is today? ${dayOfTheWeek[new Date().getDay()]}`);
+    </code>
+    
+    O uso de object literal permite maior legibilidade e não corremos o risco de esquecer algum break 
+    Object literal syntax, não é bom quando você precisa duplicar esse objeto e ele tem pelo menos um método 
+    Solução usar factory ou constructor
+
+** FACTORY **
+
+    o padrão factory estabelece uma forma de desenvolver objetos que são responsáveis pela criação de outros objetos.
+    Este padrão encapsula a criação de objetos a partir de um de seus métodos, funcionando como uma fábrica de objetos propriamente dita
+    O retorno da função é puramente um objeto, sem exigir que vc use classe, constructors e o operador new.
+    é mais dinâmico, facilita manutenção e encapsula 
+
+    <code>
+        const circle = {
+            radius: 1,
+            location: {
+                x: 1,
+                y: 1
+            }
+        };
+
+        const circle = {
+            radius: 2,
+            location: {
+                x: 2,
+                y: 2
+            }
+        };
+    </code>
+
+    Otimizado:
+    <code>
+        function createCircle(radius) {
+            return {
+                radius,
+                draw() {
+                    console.log('draw');
+                }
+            }
+        };
+
+        const circle = createCircle(1);
+        circle.draw();
+    </code>
+
+    outro exemplo: 
+    <code>
+        function cadastrarLivro(titulo, autor, editora) { // Perceba o encapsulamento e a facilidade de manutenção
+            return {
+                titulo,
+                autor,
+                editora,
+                eUsado() {
+                    console.log('Verificando se o livro é novo ou usado...');
+                }
+            }
+        }
+
+        const livro = cadastrarLivro('Dom Casmurro e os discos voadores', 'ASSIS, Machado de; MANFREDI, Lúcio', 'Lua de Papel');
+        console.log(livro);
+        livro.eUsado();
+    </code>
+
+** CONSTRUCTORS **
+    usa a palavra reservada new 
+
+    function Circle(radius) {
+        this.radius = radius;
+        this.draw = function() {
+            console.log('draw');
+        }
+    }
+
+    const another = new Circle(1);
+
+
+** QUANDO USAR FACTORY E QUANDO USAR CONSTRUCTOR **
+    Em factory, todo objeto que é criado, vai ser uma cópia, incluindo qualquer função que vc adiciona ao objeto
+    Então se você tem 3 objetos, você vai ter3 cópias da mesma função == mais espaço na memória. É uma função pura que tem um objeto puro em si. 
+
+    Já um construtor por outro lado, cria não uma cópia mais uma referência. Então os mesmos objetos vão usar a mesma única função, ou seja, 
+    vai ocupar menos espaço na memória. Usa this e new como palavras chave na sua construção.
+    Esquecer de usar o 'new' faz com que passamos a definir proriedades e métodos no objeto global, no caso no objeto window.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+** CONSTRUCTOR PROPERTY **
+    
+    Todos os objetos em JavaScript tem uma propriedade chamada constructor
+    E isso se refere à função que foi usada para construir ou criar um objeto
+    Sintaxe ==> object.constructor
+    A partir daqui, ele vai retornar a função desse objeto 
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+** FUNCTIONS ARE OBJECTS **
+
+    Você pode colocar métodos e propriedades em funções também assim como em outros objetos
+    ex: FunctionName.length(1, 2, 3) -> retorna 3, o número de argumentos.
+
+    Todo objeto em JavaScript tem a propriedade constructor (que referencia a função que criou o objeto), mas quem criou o objeto foi a própria função. Como?
+
+    <code>
+        const Circle = new Function('radius', ` // É isso que a engine do JS faz ao criar um objeto 
+        this.radius = radius;
+        this.draw = function() {
+            console.log('draw');
+        }
+        `);
+
+        const circle = new Circle(1);
+
+        A expressão new Function('radius', ...) cria uma nova função em JavaScript. O primeiro argumento, 'radius', é o nome do argumento da função e o segundo argumento, o corpo da função entre crases, especifica o que a função faz.
+
+        Quando você usa a palavra-chave new antes de uma função, você está criando um novo objeto a partir daquela função. Isso é chamado de "instanciar" a função e o objeto criado é chamado de "instância" da função.
+    </code>
+
+    Perceba que fazer isso é igual a fazer isso:
+    <code>
+        function Circle(radius) {
+            this.radius = radius;
+            this.draw = function() {
+                console.log('draw');
+            }
+        }
+
+        const circle = new Circle(1);
+
+        console.log(circle);
+    <\code>
+
+    MÉTODOS DE FUNÇÕES 
+
+    If a function is not a method of a JavaScript object, it is a function of the global object 
+    
+    Sendo assim, uma função é uma instância do tipo Function. O tipo function tem o método call()
+    O primeiro parâmetro é o valor do this (geralmente se coloca o nome do objeto em si) 
+
+    Então quando vc faz uma nova instância de uma classe e coloca 
+    const sla = new Seila(parametro)
+
+    o new ele faz isso: Seila.call({}, parametro)
+
+    se vc não coloca o new, o primeiro parâmetro recebe o objeto global do browser, o 'window'. Desse modo:
+    Seila.call(window, parametro)
+    Retornando o objeto global Window.
+
+    Mas esse método call também serve para quando você quer usar atributos de uma classe em outra
+
+    ----
+    
+    Existe também o método apply(), serve pra chamar uma função também assim como call()
+    MAS ao invés de passar todos os argumentos um por um, nós os passamos em um array
+    Isso é útil quando nós já temos um array pronto em nossa aplicação e nós queremos passar esse array como segundo argumento 
+
+    <code>
+        Circle.apply({}, [1, 2, 3]);
+    </code>

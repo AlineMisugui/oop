@@ -1,16 +1,37 @@
- // Object literal syntax, não é bom quando você precisa duplicar esse objeto e ele tem pelo menos um método 
-// Solução usar factory ou constructor
 
-// Se um objeto tem 1 ou mais métodos dizemos que esse objeto tem um comportamento (behavior)
+function Circle(radius) {
+    this.radius = radius;
 
-function createCircle(radius) {
-    return {
-        radius, // Propriedade
-        draw: function() {
-            console.log('draw');
-        }
+    let defaultLocation = {
+        x: 0,
+        y: 0
+    }; 
+
+    this.getDefaultLocation = function() {
+        return defaultLocation;
     };
+
+    this.draw = function() {
+        console.log('draw');
+    };
+
+    Object.defineProperty(this, 'defaultLocation', {
+        get: function() {
+            return defaultLocation;
+        },
+
+        set: function(value) {
+            if (!value.x || !value.y) {
+                throw new Error('Invalid location');
+            }
+            defaultLocation = value;
+        }
+    })
 }
 
-const circle = createCircle(1);
+const circle = new Circle(10);
 circle.draw();
+console.log(circle);
+circle.defaultLocation = 1;
+
+// get função para ler uma propriedade -> read only property

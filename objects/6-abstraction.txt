@@ -1,0 +1,61 @@
+<code>
+    function Circle(radius) {
+        this.radius = radius;
+
+        this.defaultLocation = {
+            x: 0,
+            y: 0
+        }; 
+
+        this.computeOptimunLocation = function(factor) {
+            // ...
+        };
+
+        // No conceito de abstração, devemos esconder os detalhes e mostrar apenas o essencial
+        // Desse modo, precisamos esconder os métodos defaultLocation e computeOptimunLocation
+        // Pois queremos mostrar apenas o raio e o método desenhar
+
+        /*
+            Deixar um objeto com tudo público e acessível por todas as partes do código, pode trazer problemas como:
+            - Toda vez que você mudar a implementação do objeto, você terá que modificar vários lugares diferentes no seu código
+
+        */
+
+        this.draw = function() {
+            this.computeOptimunLocation(0.1);
+
+            console.log('draw');
+        }
+    }
+
+    const circle = new Circle(10);
+    /* circle.computeOptimunLocation(0.1); --> Isso pode ser removido ao colocar dentro da função draw por exemplo*/
+    circle.draw();
+</code>
+
+Se quisermos esconder a propriedade defaultLocation do exemplo acima, basta declará-la como se fosse uma variável local:
+<code>
+    let defaultLocation = {
+        x: 0,
+        y: 0
+    };
+</code>
+
+E para converter o método computeOptimunLocation para privado é só declarar como variável local também: 
+<code>
+    let computeOptimunLocation = function(factor){};
+</code>
+
+Mas ao fazer isso, precisamos mudar a chamada do método computeOptimunLocation no método draw também para:
+<code>
+    this.draw = function() {
+        computeOptimunLocation(0.1);
+        ...
+    }
+</code>
+
+Isso porque closures são diferentes de escopo
+Escopo é temporário e após a função ser executada ele morre, mas as closures continuam lá com seu estado anterior
+(o valor this é estabelecido segundo o escopo de execução no qual está inserido)
+ou seja, tirar o this implica em pegar a variável do escopo de Circle e não de draw
+com o conceito de clousure, podemos assumir isso também já que a função draw que é mais interna pode acessar o que é mais externo, no caso o método computeOptimunLocation

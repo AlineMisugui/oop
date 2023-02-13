@@ -1,0 +1,72 @@
+Objetos em JavaScript são dinâmicos, isso significa que uma vez instanciados, você pode adicionar e remover propriedades
+
+aqui está um objeto:
+<code>
+    function Circle(radius) {
+        this.radius = radius;
+        this.draw = funtion() {
+            console.log('draw');
+        }
+    }
+
+    const circle = new Circle(10);
+</code>
+
+vamos adicionar propriedades a ele, para isso temos duas formas
+A primeira: 
+<code>
+    circle.location = {
+        x = 1
+    }; // Adicionando propriedade location em circle
+</code>
+
+Outra forma:
+<code>
+    circle['location'] = {
+        x: 2
+    }; // Outra forma de add
+</code>
+
+Quando usar dessa segunda forma? Quando queremos reutilizar a propriedade adicionada ou quando o nome da mesma contém espaços e caracteres especiais
+<code>
+    const propetyName = 'location';
+    circle[propetyName] = {
+        x: 1
+    }; // Dá pra fazer assim também, quando você pode usar mais de uma vez a propriedade
+
+    const propName = 'center-location'; // Não dá pra escrever cicle.center-location
+    // Então fazemos assim:
+    circle[propName] = {
+        x: 1
+    };
+</code>
+
+Removendo propriedades:
+<code>
+    delete circle.location;
+    delete circle['location']
+</code>
+
+ENUMERANDO PROPRIEDADES
+
+<code>
+    function Circle(radius) {
+        this.radius = radius;
+        this.draw = function() {
+            console.log('draw');
+        }
+    }
+
+    const circle = new Circle(10);
+
+    for (let key in circle) {
+        if (typeof circle[key] !== 'function') // Imprime somente os atributos sem retonrar os métodos
+            console.log(key, circle[key]); // Key é o nome da propriedade e circle[key] é seu valor
+    }
+
+    const keys = Object.keys(circle);
+    console.log(keys); // Os nomes das propriedades
+
+    if ('radius' in circle) // Saber se uma propriedade está em um objeto
+        console.log('Circle has a radius');
+</code>

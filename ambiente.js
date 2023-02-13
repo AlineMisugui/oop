@@ -1,14 +1,14 @@
-function cadastrarLivro(titulo, autor, editora) {
-    return {
-        titulo,
-        autor,
-        editora,
-        eUsado() {
-            console.log('Verificando se o livro é novo ou usado...');
-        }
+
+function Circle(radius) {
+    console.log(this);
+    this.radius = radius;
+    this.draw = function() {
+        console.log('draw');
     }
 }
 
-const livro = cadastrarLivro('Dom Casmurro e os discos voadores', 'ASSIS, Machado de; MANFREDI, Lúcio', 'Lua de Papel');
-console.log(livro);
-livro.eUsado();
+const ab = Circle.call({}, 1);
+const another = new Circle(1);  
+
+const ee = Circle(1);
+const cu = Circle.call(Window, 1);

@@ -1,10 +1,10 @@
 ** O QUE É POO? **
 
-    Programação orientada a objeto é um paradigma (exemplo que serve como modelo, padrão) centrado em objetos ao invés de funções
+    Programação orientada a objeto é um paradigma (exemplo que serve como modelo, padrão) centrado em objetos (instâncias de classes) ao invés de funções
     Ao invés de fazer um programa funcional, você pode fazer um orientado a objetos
     Não é uma linguagem ou ferramenta de programação, é apenas um estilo de programar ou paradigma de programação
 
-    Há várias linguagens de programação que oferecem suporte para orientação a objetos
+    Há várias linguagens de programação que oferecem suporte para orientação a objetos, aqui vamos focar em aprender poo em JavaScript
 
 ** POR QUE USAR POO? **
 

@@ -1,0 +1,75 @@
+CATEGORIA DE TIPOS
+
+VALUE TYPES - Primitives
+    Number
+    String 
+    Boolean
+    Symbol (ES6)
+    undefined
+    null
+
+REFERENCE TYPES
+    Object
+    Function (are objects)
+    Array (also objects)
+
+    ---> Ou seja, em JavaScript nós temos tipos primitivos e objetos
+
+Por referência o valor muda 
+
+<code> 
+    //  Primeiro, por valor:
+
+    let x = 10;
+    let y = x;
+    
+    let x = 20;
+    console.log(x, y); // 20, 10
+
+    // Perceba que x e y são independentes e a mudança de x não altera y
+</code>
+
+<code>
+    // Agora por referência, no caso, usando objetos
+
+    let x = {
+        valor: 10;
+    }
+    let y = x;
+
+    x.value = 20;
+
+    console.log(x, y); // {valor: 20}, {valor: 20}
+</code>
+
+Quando usamos um objeto, esse objeto não fica armazenado na variável. Nesse exemplo valor: 10 não está armazenado em x
+{valor: 10} fica armazenado em algum espaço da memória e x guarda o espaço da memória em que o objeto está armazenado. Então,
+ao passar o valor de x para y, na verdade o que estamos passando é uma cópia do endereço de memória.
+Em outras palavras, x e y estão apontando para o mesmo objeto na memória, então quando modificamos um objeto por x por exemplo, essa mudança fica visível para y também.
+
+Em conclusão: Primitivos são copiados por seus valores.
+Objetos são copiados pela sua referência.
+
+<code>
+    let number = 10;
+
+    function increase(number) {
+        number++;
+    }
+
+    increase(number);
+    console.log(number); // 10 -> pq ele vai pegar o number lá de cima
+
+    ----------------------------
+
+    let obj = {
+        value: 10
+    };
+
+    function increase(obj) {
+        obj.value++;
+    }
+
+    increase(obj);
+    console.log(obj); // 11
+</code>
