@@ -1,0 +1,81 @@
+Se temos dois objetos como esses:
+<code>
+    function Circle() {
+        let radius;
+        this.computeOptimumLocation = function() {
+            //...
+        }
+        Object.defineProperty(this, 'radius', {
+            get: function() {
+                return radius;
+            }
+        })
+    }
+
+    function Square() {
+        let height;
+        this.computeOptimumLocation = function() {
+            //...
+        }
+        Object.defineProperty(this, 'height', {
+            get: function() {
+                return height;
+            }
+        })
+    }
+</code>
+
+Não queremos copiá-los dessa forma, pois se o método computeOptimumLocation() tiver algum bug, teremos que arrumar em mais de um lugar
+Para isso serve a herança, é possível fazer Circle e Square herdarem de um objeto chamado Shape que contenha esse método, por exemplo.
+Logo dizemos que Shape é um protótipo de Cicle e Square.
+PROTOTYPE é como se fosse um pai de um outro objeto.
+
+Em JavaScript não temos classes, apenas objetos. Apesar de existir na sintaxe, uma classe é também um objeto para a linguagem.
+Classes em JavaScript são introduzidas no ECMAScript 6 e são um sintático para herança existente baseada em protótipos, em JavaScript. A sintaxe para classes não introduz um novo modelo de herança de orientação a objetos em JavaScript. Classes em JavaScript provêm uma maneira mais simples e clara de criar objetos e lidar com herança.
+
+Quando chamamos um método ou uma propriedade de um objeto, JS procura primeiro no objeto e se não encontra, procura no protótipo.
+Todo objeto tem um protótipo, exceto o objeto raíz que contém propriedades como constructor, toString, valueOf, etc.
+O prototype é um objeto regular como qualquer outro.
+
+<code>
+    let x = {};
+    let y = {};
+
+    console.log(Object.getPrototypeOf(x) === Object.getPrototypeOf(y)); // true
+
+    /*
+        Isso retornaria verdadeiro pois tanto x quanto y são filhos da classe base, no caso, do objeto raíz
+
+        x.__proto__ === y.__proto__ Isso não deve ser usado no código
+    */
+</code>
+
+
+**MULTI-LEVEL HERITANCE**
+    <code>
+        let myArray = [];
+        // Ao abrir o navegador e escrever "myArray" no console, você verá um prototype com vários métodos e propriedades possíveis para todos os arrays em JavaScript.
+        // É esse grande objeto que vai conter todos esses métodos e propriedades de arrays
+        // Se procurarmos, vamos achar outro prototype, mas dessa vez, um prototype de objeto base, aquele mesmo visto anteriormente.
+
+
+        /*
+            Isso implica que um array deriva de um objeto base, que por sua vez deriva de um objeto base. -> Isso é o que chamamos de herança multilevel.
+        */
+    </code>
+
+    Objetos criados por um dado construtor, vão ter o mesmo protótipo
+
+    <code>
+        function Circle(radius) {
+            this.radius = radius;
+
+            this.draw = function() {
+                console.log('draw');
+            }
+        }
+
+        const circle = new Circle(10);
+
+        // circle vai derivar do prototype de Circle, que por sua vez vai derivar do prototype do objeto base.
+    </code>
