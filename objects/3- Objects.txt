@@ -1,7 +1,7 @@
 
 var: problemas de escopo, não tem block scope
 
-let: substituiu var no ES6
+let: substituiu var no ES6, com block scope
 
 const: constante, não dá para retribuir um valor
 
@@ -194,21 +194,23 @@ Formas de criar objetos: object literal, factory e constructor
         console.log(circle);
     <\code>
 
+    Em JavaScript, funções são objetos por design. Isso significa que, assim como outros objetos em JavaScript, as funções são instâncias de uma classe interna chamada Function. Por serem objetos, as funções podem ser atribuídas a variáveis, passadas como argumentos para outras funções, armazenadas em objetos e retornadas como valores de outras funções.
+
+    Uma das principais razões pelas quais funções são objetos em JavaScript é que elas permitem uma programação mais flexível e poderosa. Por exemplo, uma função pode ser definida e armazenada em uma variável, permitindo que ela seja reutilizada em diferentes partes do código. Além disso, as funções podem ser passadas como argumentos para outras funções, permitindo que o código seja altamente modular e reutilizável.
+
+    Outra razão pela qual funções são objetos em JavaScript é que elas podem ter propriedades e métodos, assim como outros objetos. Por exemplo, uma função pode ter uma propriedade que armazena seu nome ou uma lista de argumentos, e pode ter métodos que permitem acessar ou modificar essas propriedades.
+
+    Em resumo, funções são objetos em JavaScript para permitir uma programação mais flexível e poderosa, bem como para fornecer a elas propriedades e métodos, assim como outros objetos em JavaScript.
+
     MÉTODOS DE FUNÇÕES 
 
     If a function is not a method of a JavaScript object, it is a function of the global object 
     
-    Sendo assim, uma função é uma instância do tipo Function. O tipo function tem o método call()
-    O primeiro parâmetro é o valor do this (geralmente se coloca o nome do objeto em si) 
+    Uma função em JavaScript é uma instância do tipo Function, que é uma classe interna embutida na linguagem usada para criar funções. O tipo Function tem um método call(), que é usado para invocar uma função com um valor específico para this. O primeiro parâmetro passado para o método call() é o valor de this que a função deve usar durante a execução.
 
-    Então quando vc faz uma nova instância de uma classe e coloca 
-    const sla = new Seila(parametro)
+    Quando uma nova instância de uma classe é criada em JavaScript usando a palavra reservada new, o JavaScript internamente executa a função construtora usando o método call() e passa um objeto vazio como o valor de this. Por exemplo, ao escrever const objeto = new MinhaClasse(), o JavaScript internamente executa MinhaClasse.call({}, []).
 
-    o new ele faz isso: Seila.call({}, parametro)
-
-    se vc não coloca o new, o primeiro parâmetro recebe o objeto global do browser, o 'window'. Desse modo:
-    Seila.call(window, parametro)
-    Retornando o objeto global Window.
+    Se a palavra reservada new não for usada ao criar uma nova instância de uma classe, a função construtora é executada normalmente, mas o valor de this dentro da função será o objeto global do ambiente de execução, como o objeto window em um navegador. Isso pode levar a comportamentos inesperados se a função construtora depende do valor de this para inicializar corretamente a nova instância da classe.
 
     Mas esse método call também serve para quando você quer usar atributos de uma classe em outra
 

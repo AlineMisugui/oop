@@ -1,0 +1,46 @@
+INSTANCE VS PROTOTYPE MEMBERS
+
+<code>
+    function Circle(radius) {
+        // Instance members, vai fazer uma cópia para todos os objetos
+        this.radius = radius;
+    }
+
+    // Prototype members vai ficar de boa lá até ser chamado
+    Circle.prototype.draw = function() {
+        console.log('draw');
+    }
+
+    const c1 = new Circle(1);
+    const c2 = new Circle(1);
+</code>
+
+Aqui vamos criar um prototype para Circle, ou seja, uma classe mãe
+<code>
+    Circle.prototype.toString = function() {
+        return 'Circle with radius ' + this.radius;
+    } 
+
+    // c1.toString() -> "Circle with radius 1".
+</code>
+
+Primeiro JS vai procurar o método toString no protótipo de c1, depois não vai achar e vai procurar no protótipo de Circle  
+
+Observe o seguinte:
+<code>
+    // Isso retorna membros instanciados
+    console.log(Object.keys(c1));
+
+    // Já isso retorna todos os membros (instance (own) + prototype)
+    for (let key in c1) {
+        console.log(key);
+    }
+</code>
+
+instance property = own
+prototype property
+
+<code>
+    c1.hasOwnProperty('radius'); // true -> pq o radius tá no c1
+    c1.hasOwnProperty('draw'); // false -> pq o draw tá no prototype de c1
+</code>

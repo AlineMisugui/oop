@@ -7,8 +7,10 @@ Shape.prototype.duplicate = function() {
 }
 
 function Circle(radius) {
-    this.radius = radius;
+    this.radius = radius; 
 }
+Circle.prototype = Object.create(Shape.prototype);
+Circle.prototype.constructor = Circle; // reseta o construtor porque senão o construtor dele será a função de shape e não de circle
 
 Circle.prototype.draw = function() {
     console.log('draw');
@@ -17,5 +19,3 @@ Circle.prototype.draw = function() {
 const s = new Shape();
 const c = new Circle(1);
 
-console.log(s);
-console.log(c);

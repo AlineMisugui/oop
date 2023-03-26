@@ -1,0 +1,4 @@
+QUANDO E PARA QUE USAR HERANÇA?
+
+Usar herança em projetos pequenos pode torná-los confusos e complexos.
+Comece com pequenos objetos, se você perceber que há vários desses objetos com características similares compartilhadas dá para usar herança 

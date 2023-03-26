@@ -1,0 +1,48 @@
+propriedade .getOwnPropertyDescriptor()
+Serve para settar propriedades para atributos de um objeto
+<code>
+    let person = { name: 'Aline' };
+    let objectBase = Object.getPrototypeOf(person);
+    let descriptor = Object.getOwnPropertyDescriptor(objectBase, 'toString'); // estou settando propriedade toString para atributos
+    console.log(descriptor);
+    /*
+        Por padrão todos esses atributos abaixo são true
+        configurable: true -> podemos deletar esse membro se quisermos
+        enumeratable: true -> podemos ver os métodos e atributos de um objeto
+        writable: true -> Podemos sobrescrever esse método
+    */
+</code>
+
+Para settar valores de propriedades, podemos usar o .defineProperty(objeto, 'nome', {})
+<code>
+    let person = { name: 'Aline' };
+
+    Object.defineProperty(person, 'name', {
+        writable: false
+        enumerable: false
+        configurable: false
+    });
+
+    person.name = 'Ana';
+    console.log(person);  
+    console.log(Object.keys(person));
+    delete person.name;
+</code>
+
+Perceba no exemplo acima que nada muda, o name que aparecerá no console continuará sendo 'Aline'e não poderemos ver os métodos e atributos do objeto de forma enumerada, o que ele retorna é apenas um array vazio. Além disso não poderemos deletar o atributo name, já  que o configurable foi settado para false
+
+------------
+
+CONSTRUCTOR PROTOTYPES
+O protótipo do construtor é o mesmo do objeto
+<code>
+    let array = [];
+    array.__proto__ === Array.prototype // true 
+    // Array é o construtor -> isso acontece por de baixo dos panos
+</code>
+
+<code>
+    let obj = {};
+    obj.__proto__ === Object.prototype // true
+    // Object é o construtor -> isso acontece por de baixo dos panos
+</code>

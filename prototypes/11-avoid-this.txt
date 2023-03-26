@@ -1,0 +1,11 @@
+DON'T MODIFY OBJECTS YOU DON'T OWN!
+Basically, avoid extending the Built-in objects like this:
+
+<code>
+    Array.prototype.shuffle = function() {
+        // ...
+    }
+</code>
+
+Porque pode ser que você use uma biblioteca onde a pessoa já mudou o prototype do Array com o método shuffle também, mas com uma funcionalidade diferente, então você vai ficar o dia inteiro procurando o erro :)
+Além disso, pode ser que em uma nova versão do JavaScript já adicionem o esse método de arrays
